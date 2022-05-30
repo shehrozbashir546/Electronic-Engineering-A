@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
+<nta>
+	<declaration>// Place global declarations here.
+clock clk;
+chan slow, wait, cross, completed, com;</declaration>
+	<template>
+		<name x="5" y="5">TMS</name>
+		<declaration>// Place local declarations here.</declaration>
+		<location id="id0" x="-297" y="-221">
+			<name x="-305" y="-255">Idle</name>
+		</location>
+		<location id="id1" x="-357" y="-102">
+			<name x="-367" y="-136">Communication</name>
+		</location>
+		<location id="id2" x="-425" y="-221">
+			<name x="-435" y="-255">Cross</name>
+		</location>
+		<location id="id3" x="-476" y="17">
+			<name x="-486" y="-17">SlowDown</name>
+		</location>
+		<location id="id4" x="-229" y="25">
+			<name x="-239" y="-9">Wait</name>
+		</location>
+		<init ref="id0"/>
+		<transition>
+			<source ref="id3"/>
+			<target ref="id1"/>
+			<nail x="-391" y="-25"/>
+		</transition>
+		<transition>
+			<source ref="id1"/>
+			<target ref="id3"/>
+			<label kind="synchronisation" x="-484" y="-85">slow!</label>
+			<nail x="-450" y="-68"/>
+		</transition>
+		<transition>
+			<source ref="id1"/>
+			<target ref="id4"/>
+			<label kind="synchronisation" x="-315" y="-42">wait!</label>
+			<nail x="-323" y="-25"/>
+		</transition>
+		<transition>
+			<source ref="id4"/>
+			<target ref="id1"/>
+			<nail x="-263" y="-68"/>
+		</transition>
+		<transition>
+			<source ref="id2"/>
+			<target ref="id0"/>
+			<label kind="synchronisation" x="-399" y="-246">completed?</label>
+		</transition>
+		<transition>
+			<source ref="id1"/>
+			<target ref="id2"/>
+			<label kind="synchronisation" x="-433" y="-161">cross!</label>
+		</transition>
+		<transition>
+			<source ref="id0"/>
+			<target ref="id1"/>
+			<label kind="synchronisation" x="-327" y="-178">com?</label>
+		</transition>
+	</template>
+	<template>
+		<name>Vehicle</name>
+		<location id="id5" x="-42" y="-238">
+			<name x="-52" y="-272">Idle</name>
+		</location>
+		<location id="id6" x="102" y="-238">
+			<name x="92" y="-272">Announce</name>
+		</location>
+		<location id="id7" x="102" y="-25">
+			<name x="92" y="-59">Wait</name>
+		</location>
+		<location id="id8" x="-42" y="-25">
+			<name x="-52" y="-59">Drive</name>
+		</location>
+		<init ref="id5"/>
+		<transition>
+			<source ref="id7"/>
+			<target ref="id7"/>
+			<label kind="synchronisation" x="102" y="42">slow?</label>
+			<nail x="136" y="42"/>
+			<nail x="93" y="42"/>
+		</transition>
+		<transition>
+			<source ref="id7"/>
+			<target ref="id7"/>
+			<label kind="synchronisation" x="187" y="-25">wait?</label>
+			<nail x="178" y="-42"/>
+			<nail x="178" y="0"/>
+		</transition>
+		<transition>
+			<source ref="id8"/>
+			<target ref="id5"/>
+			<label kind="synchronisation" x="-42" y="-148">completed!</label>
+		</transition>
+		<transition>
+			<source ref="id7"/>
+			<target ref="id8"/>
+			<label kind="synchronisation" x="8" y="-42">cross?</label>
+		</transition>
+		<transition>
+			<source ref="id6"/>
+			<target ref="id7"/>
+			<label kind="synchronisation" x="102" y="-148">com!</label>
+		</transition>
+		<transition>
+			<source ref="id5"/>
+			<target ref="id6"/>
+			<label kind="guard" x="0" y="-263">clk&gt;=10</label>
+		</transition>
+	</template>
+	<system>// Place template instantiations here.
+
+// List one or more processes to be composed into a system.
+system TMS, Vehicle;
+    </system>
+	<queries>
+		<query>
+			<formula></formula>
+			<comment></comment>
+		</query>
+	</queries>
+</nta>
