@@ -29,9 +29,6 @@ process is
         o <= "110";
         l <= "000";
     end if;
-end process;
-process is
-    begin
         case posit is
             when "00" =>
                 No <= d;

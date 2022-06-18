@@ -12,7 +12,7 @@ entity Blocking is
 end Blocking;
 
 architecture northBehaviour of Blocking is
-signal d, r, o, l : std_logic_vector(2 downto 0); --right opposite left
+signal d, r, o, l : std_logic_vector(2 downto 0); --direct right opposite left
   
   begin
 process is
