@@ -1,0 +1,12 @@
+D:/ModelSim/Tms.vhd {0 {vcom -work work -2008 -explicit -stats=none D:/ModelSim/Tms.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2021.1 Compiler 2021.02 Feb  3 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity Blocking
+-- Compiling architecture northBehaviour of TMS
+** Error: (vcom-11) Could not find work.tms.
+** Note: D:/ModelSim/Tms.vhd(14): VHDL Compiler exiting
+
+} {9.0 10.0} {}}
