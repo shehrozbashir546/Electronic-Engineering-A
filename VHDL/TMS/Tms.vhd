@@ -11,41 +11,45 @@ entity Blocking is
     );
 end Blocking;
 
-architecture northBehaviour of Blocking is
+architecture Behaviour of Blocking is
+--set the crossroad in the perspective of the main car
 signal d, r, o, l : std_logic_vector(2 downto 0); --direct right opposite left
   
   begin
-process is
+process(car,posit) is
  begin
-  r <= "010";
-  d <= "111";
-    if car="001" then
+--assign the allowed turns to every direction in cars perspective
+
+  r <= "010";			--right side is always allowed to turn right
+  d <= "111";			--same direction is always allowed to move any direction
+
+    if car="001" then 		--turning left
         o <= "000";
         l <= "000";
-    elsif car="010" then
+    elsif car="010" then  	--turning right
         o <= "110";
         l <= "111";
-    elsif car="100" then
+    elsif car="100" then  	--going straught
         o <= "110";
         l <= "000";
     end if;
         case posit is
-            when "00" =>
+            when "00" =>	--Main car coming from North
                 No <= d;
                 So <= o;
                 Eo <= r;
                 Wo <= l;
-            when "01" =>
+            when "01" =>	--Main car coming from East
                 No <= l;
                 So <= r;
                 Eo <= d;
                 Wo <= o;
-            when "10" =>
+            when "10" =>	--Main car coming from South
                 No <= o;
                 So <= d;
                 Eo <= l;
                 Wo <= r;
-            when "11" =>
+            when "11" =>	--Main car coming from West
                 No <= r;
                 So <= l;
                 Eo <= o;
